@@ -1,3 +1,4 @@
+import styles from "./App.module.css";
 import "./App.css";
 import React, { useState } from "react";
 import Person from "./Person/Person";
@@ -36,19 +37,11 @@ const App = () => {
     });
   };
 
-  const style = {
-    backgroundColor: "green",
-    font: "inherit",
-    border: "1px solid blue",
-    padding: "8px",
-    cursor: "pointer",
-    color: "white",
-  };
-
   const togglePeopleHandler = () =>
     setShowPeopletate({ showPeople: !showPeopleState.showPeople });
 
   let people = null;
+  let buttonClass = [styles.button];
   if (showPeopleState.showPeople) {
     people = (
       <div>
@@ -65,23 +58,21 @@ const App = () => {
         })}
       </div>
     );
-    style.backgroundColor = "red";
+    buttonClass.push(styles.Red);
   }
 
   let classes = [];
-  if (peopleState.people.length <= 2) classes.push("red");
-  if (peopleState.people.length <= 1) classes.push("bold");
+  if (peopleState.people.length <= 2) classes.push(styles.red);
+  if (peopleState.people.length <= 1) classes.push(styles.bold);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Hi! I'm a React App</h1>
-        <p className={classes.join(" ")}>This is really working!</p>
-        <button style={style} onClick={togglePeopleHandler}>
-          Switch Button
-        </button>
-        {people}
-      </header>
+      <h1>Hi! I'm a React App</h1>
+      <p className={classes.join(" ")}>This is really working!</p>
+      <button className={buttonClass.join(" ")} onClick={togglePeopleHandler}>
+        Toggle Text
+      </button>
+      {people}
     </div>
   );
 };
